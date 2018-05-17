@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	  <meta charset="utf-8">
+	  <title>Eulers's Formula</title>
+	  <meta name="description" content="Rose of Grandi">
+	  <meta name="author" content="SitePoint">
+	  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" /> 
+	 <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js">
+	 </script>
+</head>
+
+
+<body>
+
+<h1>
+Euler's Formula for Complex Numbers
+</h1>
+<h2>
+ <i>re<sup>i&theta;</sup> = xcos&theta; + iysin&theta;</i><br>
+</h2>
+
+
+<div id="boxintegral" style="width:600px; height:600px; background-color:#dfeaf5; border-color:black;">
+</div>
+			
+
+<script type="text/javascript">
+
+board = JXG.JSXGraph.initBoard('boxintegral',{boundingbox:[-1,1,1,-1],
+					grid: {
+					gridX: 10,
+					gridY: 10
+				}, axis:true, showNavigation:false, showCopyright:false});
+	
+function getColor (x,y) {
+var col='blue';
+if (x*y<0) {col='red'};
+return col;
+}
+
+
+//make pt at origin
+//create point at origin for dipole position
+var pt0 = board.create('point',[0,0],{color:'blue',withLabel:true, name:'P0', fixed:true, label:{color:'blue',fontSize:'20'}} );
+var pt1 = board.create('point',[0.5,0.5],{color:'blue',withLabel:true, name:'P1',label:{color:'red',fontSize:'20'}} );
+var pt2 = board.create('point',[function() {return Math.sqrt(pt1.X()*pt1.X()+pt1.Y()*pt1.Y())},0.0],{name:'P2',fixed:true});
+var ar1 = board.create('arrow',[pt0,pt1]);
+
+//var pt3=board.create('point',[function() {return 1.5*pt1.X()}, function() {return 1.5*pt1.Y()}] );
+//var a2 = board.create('arrow',[pt0,pt3]);
+
+var ang1= board.create('angle',[pt2,pt0,pt1],{radius:function(){return Math.sqrt(pt1.X()*pt1.X()+pt1.Y()*pt1.Y())}, fillColor:function() {return getColor(pt1.X(),pt1.Y())}, name:'&theta;', label:{fontSize:'40'}} );
+
+var x = pt1.X();
+var txtx = board.create('text', [-0.8,0.50, function() {return "x = "+pt1.X().toFixed(3) }], {fontSize:'20'});
+var txty = board.create('text', [-0.8,0.425, function() {return "y = "+pt1.Y().toFixed(3) }], {fontSize:'20'});
+var rad  = board.create('text', [-0.8,0.350, function() {return "rad ="+Math.sqrt(pt1.X()*pt1.X()+pt1.Y()*pt1.Y()).toFixed(3)}], {fontSize:'20'} );
+var theta= board.create('text', [-0.8,0.275,function() {return "theta="+(180/Math.PI*Math.atan2(pt1.Y(),pt1.X())).toFixed(3)} ],  {fontSize:'20'} );
+
+</script>
+
+
+</body>
+</html>

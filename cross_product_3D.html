@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Cross Product 3D</title>
+	<script src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js" type=
+	"text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+</head>
+
+<body>
+	<h1>3D cross product</h1>
+
+	<div id="box" style="width:500px; height:500px;"></div><script type=
+	"text/javascript">
+//Board Init Parameters
+//JXG.Options.text.useMathJax = true;
+
+//BoardInit Helper Function
+var initBoard = function (xNeg, xPos, yNeg, yPos) {
+
+return JXG.JSXGraph.initBoard('box', {
+axis: false,
+boundingbox: [xNeg, yPos, xPos, yNeg],
+grid: false,
+keepaspectratio: false,
+showCopyright: false,showNavigation: false});
+
+	};
+
+var brd = initBoard(-3, 3, -3, 3);
+
+
+var x=brd.create('arrow',[[-3,0],[3,0]],{strokeWidth:2,label:'x',strokeColor:'grey'});
+var y=brd.create('arrow',[[0,-3],[0,3]],{strokeWidth:2,label:'y',strokeColor:'grey'});
+
+var z=brd.create('arrow',[[-3,-3],[3,3]],{strokeWidth:2,label:'z',strokeColor:'grey'});
+
+
+
+var a_point=brd.create('point',[1,0],{name:'a'});
+var b_point=brd.create('point',[0,1],{name:'b'});
+
+
+
+var cross_prod=brd.create('glider',[function(){return a_point.X()*b_point.Y()-a_point.Y()*b_point.X();},function(){return a_point.X()*b_point.Y()-a_point.Y()*b_point.X();},z],{name:"a x b"});
+
+var arrow_a=brd.create('arrow',[[0,0],a_point]);
+var arrow_b=brd.create('arrow',[[0,0],b_point]);
+var arrow_cross=brd.create('arrow',[[0,0],cross_prod]);
+
+
+//axes labels:
+xlabel=brd.create('text',[2.8,0.1,function(){return '<strong>x</strong>';}],{fontSize:14});
+
+ylabel=brd.create('text',[0.1,2.8,function(){return '<strong>y</strong>';}],{fontSize:14});
+
+zlabel=brd.create('text',[2.6,2.8,function(){return '<strong>z</strong>';}],{fontSize:14});
+
+
+var seg1=[];
+for(ia=0;ia<9;ia++){
+    seg1[ia]=brd.create('segment',[[-4+0.5*ia,-4+0.5*ia],[-1+0.5*ia,-4+0.5*ia]],{strokeColor:'grey',strokeWidth:0.5})};
+
+
+var seg2=[];
+for(ia=0;ia<9;ia++){
+    seg2[ia]=brd.create('segment',[[-4+0.5*ia,-4+0.5*ia],[-4+0.5*ia,-1+0.5*ia]],{strokeColor:'grey',strokeWidth:0.5})};
+
+seg3=[];
+for (ia=0;ia<7;ia++){
+    seg3[ia]=brd.create('segment',[[0.5*ia,0],[-3+0.5*ia,-3]],{strokeColor:'grey',strokeWidth:0.5})};
+
+seg4=[];
+for (ia=0;ia<6;ia++){
+     seg4[ia]=brd.create('segment',[[0,0.5*ia],[3,0.5*ia]],{strokeColor:'grey',strokeWidth:0.5})};
+
+seg5=[];
+for (ia=0;ia<6;ia++){
+    seg5[ia]=brd.create('segment',[[0.5*ia,0],[0.5*ia,3]],{strokeColor:'grey',strokeWidth:0.5})};
+
+seg6=[];
+for (ia=0;ia<6;ia++){
+    seg6[ia]=brd.create('segment',[[0,0.5*ia],[-4-0.5*ia,0.5*ia-4]],{strokeColor:'grey',strokeWidth:0.5})};
+
+
+	
+</script>
+</body>
+</html>
